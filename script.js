@@ -6,13 +6,7 @@ var userClickedPattern = [];
 var level = 0;
 var started = false;
 
-$(".btn").click(function () {
-    var userChosenColour = $(this).attr("id");
-    userClickedPattern.push(userChosenColour);
-    playSound(userChosenColour);
-    animatePress(userChosenColour);
-});
-
+//Start the game
 $(document).keypress(function () {
     if (!started) {
         nextSequence();
@@ -20,7 +14,20 @@ $(document).keypress(function () {
     }
 });
 
+//Clicked button events
+$(".btn").click(function () {
+    var userChosenColour = $(this).attr("id");
+    userClickedPattern.push(userChosenColour);
+
+    playSound(userChosenColour);
+    animatePress(userChosenColour);
+
+    checkAnswer(userClickedPattern.length - 1);
+});
+
 function nextSequence() {
+    // Reset user answers
+    userClickedPattern = [];
 
     level++;
     $(".title").text("Nível " + level);
@@ -40,7 +47,21 @@ function playSound(name) {
 
 function animatePress(currentColour) {
     $("." + currentColour).addClass("pressed");
-    setInterval(() => {
+    setTimeout(() => {
         $("." + currentColour).removeClass("pressed");
     }, 100);
+}
+
+function checkAnswer(currentLevel) {
+    if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
+        if (userClickedPattern.length === gamePattern.length) {
+            setTimeout(function () {
+                nextSequence();
+                console.log(gamePattern)
+                console.log(userClickedPattern);
+            }, 1000);
+        }
+    } else {
+        console.log("Wrong");
+    }
 }
