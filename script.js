@@ -66,5 +66,12 @@ function checkAnswer(currentLevel) {
             $("body").removeClass("game-over");
         }, 200);
         $(".title").text("Fim de jogo. Pressione qualquer tecla para recomeçar.");
+        restart();
     }
+}
+
+function restart() {
+    level = 0;
+    gamePattern = [];
+    started = false;
 }
