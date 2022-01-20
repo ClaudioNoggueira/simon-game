@@ -47,3 +47,8 @@ body {
     background-color: grey;
     box-shadow: 0 0 20px white;
 }
+
+.game-over {
+    background-color: red;
+    opacity: .8;
+}

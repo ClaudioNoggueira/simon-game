@@ -57,11 +57,14 @@ function checkAnswer(currentLevel) {
         if (userClickedPattern.length === gamePattern.length) {
             setTimeout(function () {
                 nextSequence();
-                console.log(gamePattern)
-                console.log(userClickedPattern);
             }, 1000);
         }
     } else {
-        console.log("Wrong");
+        playSound("wrong");
+        $("body").addClass("game-over");
+        setInterval(() => {
+            $("body").removeClass("game-over");
+        }, 200);
+        $(".title").text("Fim de jogo. Pressione qualquer tecla para recomeçar.");
     }
 }
